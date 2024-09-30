@@ -4,17 +4,11 @@
 # not possible to define an own compilation way at this point which is the
 # reason why we add our libraries at the end of this file.
 set(EXTRA_COMPONENT_DIRS
-    "thirdparty/esp-matter/connectedhomeip/connectedhomeip/config/esp32/components"
-    "thirdparty/esp-matter/components"
     "thirdparty/idf-extra-components"
-    "thirdparty/esp_secure_cert_mgr"
-    "thirdparty/esp-serial-flasher"
-    "ota/ble"
     "osal"
     ${extra_components_dirs_append})
 
 set(COMPONENTS
-    esp-tls 
     main
     )
 
@@ -22,7 +16,6 @@ set(COMPONENTS
 if(NOT CMAKE_BUILD_TYPE STREQUAL "Release")
     list(APPEND COMPONENTS
         app_trace
-        esp_matter_console
         )
 endif()
 

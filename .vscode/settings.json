@@ -8,7 +8,6 @@
   "idf.adapterTargetName": "esp32h2",
   "idf.openOcdConfigs": ["board/esp32h2-builtin.cfg"],
   "idf.espIdfPath": "${workspaceFolder}/thirdparty/esp-idf",
-  "idf.espMatterPath": "${workspaceFolder}/thirdparty/esp-matter",
   "idf.toolsPath": "${userHome}/.espressif",
   "idf.port": "/dev/ttyACM0",
   "idf.flashType": "UART",

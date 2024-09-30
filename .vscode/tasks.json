@@ -22,7 +22,7 @@
     {
       "label": "ESP-IDF: Build development",
       "type": "shell",
-      "command": "source ${config:idf.espIdfPath}/export.sh && source ${config:idf.espMatterPath}/export.sh && idf.py -B build_dev -DCMAKE_BUILD_TYPE=Debug build && idf_size.py build_dev/IotActuator.map",
+      "command": "source ${config:idf.espIdfPath}/export.sh && idf.py -B build_dev -DCMAKE_BUILD_TYPE=Debug build && idf_size.py build_dev/TrialExecutable.map",
       "windows": {},
       "options": {
         "cwd": "${workspaceFolder}",
@@ -63,7 +63,7 @@
     {
       "label": "ESP-IDF: Build production",
       "type": "shell",
-      "command": "source ${config:idf.espIdfPath}/export.sh && source ${config:idf.espMatterPath}/export.sh && idf.py -B build_prod -DCMAKE_BUILD_TYPE=Release build && idf_size.py build_prod/IotActuator.map",
+      "command": "source ${config:idf.espIdfPath}/export.sh && idf.py -B build_prod -DCMAKE_BUILD_TYPE=Release build && idf_size.py build_prod/TrialExecutable.map",
       "windows": {},
       "options": {
         "cwd": "${workspaceFolder}",
@@ -102,28 +102,9 @@
       }
     },
     {
-      "label": "ESP-IDF: Open menuconfig",
-      "type": "shell",
-      "command": "source ${config:idf.espIdfPath}/export.sh && source ${config:idf.espMatterPath}/export.sh && idf.py menuconfig",
-      "problemMatcher": [],
-      "presentation": {
-        "echo": true,
-        "reveal": "always",
-        "focus": false,
-        "panel": "shared",
-        "showReuseMessage": true,
-        "clear": false
-      },
-      "options": {
-        "env": {
-          "IDF_EXPORT_QUIET": "1"
-        }
-      }
-    },
-    {
       "label": "ESP-IDF: Clean project",
       "type": "shell",
-      "command": "source ${config:idf.espIdfPath}/export.sh && source ${config:idf.espMatterPath}/export.sh && idf.py -B ${input:buildDirectory} fullclean",
+      "command": "source ${config:idf.espIdfPath}/export.sh && idf.py -B ${input:buildDirectory} fullclean",
       "windows": {
         "command": "${config:idf.pythonBinPathWin} ${config:idf.espIdfPathWin}\\tools\\idf.py fullclean",
         "options": {
@@ -148,7 +129,7 @@
     {
       "label": "ESP-IDF: Flash the device",
       "type": "shell",
-      "command": "source ${config:idf.espIdfPath}/export.sh && source ${config:idf.espMatterPath}/export.sh && esptool.py --chip ${config:idf.adapterTargetName} -p ${config:idf.port} -b ${config:idf.flashBaudRate} --before=default_reset --after=hard_reset write_flash @flash_args",
+      "command": "source ${config:idf.espIdfPath}/export.sh && esptool.py --chip ${config:idf.adapterTargetName} -p ${config:idf.port} -b ${config:idf.flashBaudRate} --before=default_reset --after=hard_reset write_flash @flash_args",
       "options": {
         "env": {
           "IDF_EXPORT_QUIET": "1"
@@ -174,7 +155,7 @@
     {
       "label": "ESP-IDF: Start the monitor",
       "type": "shell",
-      "command": "source ${config:idf.espIdfPath}/export.sh && source ${config:idf.espMatterPath}/export.sh && idf.py -B ${input:buildDirectory} -p ${config:idf.port} monitor",
+      "command": "source ${config:idf.espIdfPath}/export.sh && idf.py -B ${input:buildDirectory} -p ${config:idf.port} monitor",
       "windows": {
         "command": "${config:idf.pythonBinPathWin} ${config:idf.espIdfPathWin}\\tools\\idf.py -p ${config:idf.portWin} monitor",
         "options": {
@@ -207,7 +188,7 @@
         "showReuseMessage": true,
         "clear": false
       },
-      "command": "source ${config:idf.espIdfPath}/export.sh && source ${config:idf.espMatterPath}/export.sh && openocd -s $OPENOCD_SCRIPTS -f ${config:idf.openOcdConfigs} -c \"init; reset halt; esp appimage_offset 0x20000; set remotetimeout 2;\"",
+      "command": "source ${config:idf.espIdfPath}/export.sh && openocd -s $OPENOCD_SCRIPTS -f ${config:idf.openOcdConfigs} -c \"init; reset halt; esp appimage_offset 0x20000; set remotetimeout 2;\"",
       "windows": {
         "command": "openocd.exe -s ${command:espIdf.getOpenOcdScriptValue} ${command:espIdf.getOpenOcdConfigs}",
         "options": {
@@ -273,29 +254,9 @@
       }
     },
     {
-      "label": "ESP-IDF: Flash factory partition",
-      "type": "shell",
-      "command": "source ${config:idf.espIdfPath}/export.sh && source ${config:idf.espMatterPath}/export.sh && esptool.py --chip ${config:idf.adapterTargetName} -p ${config:idf.port} -b 460800 --before=default_reset --after=hard_reset write_flash @fctry_flash_args",
-      "options": {
-        "cwd": "${workspaceFolder}/${input:buildDirectory}",
-        "env": {
-          "IDF_EXPORT_QUIET": "1"
-        }
-      },
-      "problemMatcher": [],
-      "presentation": {
-        "echo": true,
-        "reveal": "always",
-        "focus": false,
-        "panel": "shared",
-        "showReuseMessage": true,
-        "clear": false
-      }
-    },
-    {
       "label": "ESP-IDF: Flash app partition",
       "type": "shell",
-      "command": "source ${config:idf.espIdfPath}/export.sh && source ${config:idf.espMatterPath}/export.sh && esptool.py --chip ${config:idf.adapterTargetName} -p ${config:idf.port} -b 460800 --before=default_reset --after=hard_reset write_flash @flash_app_args",
+      "command": "source ${config:idf.espIdfPath}/export.sh && esptool.py --chip ${config:idf.adapterTargetName} -p ${config:idf.port} -b 460800 --before=default_reset --after=hard_reset write_flash @flash_app_args",
       "options": {
         "cwd": "${workspaceFolder}/${input:buildDirectory}",
         "env": {
@@ -315,7 +276,7 @@
     {
       "label": "ESP-IDF: Flash bootloader partition",
       "type": "shell",
-      "command": "source ${config:idf.espIdfPath}/export.sh && source ${config:idf.espMatterPath}/export.sh && esptool.py --chip ${config:idf.adapterTargetName} -p ${config:idf.port} -b 460800 --before=default_reset --after=hard_reset write_flash @flash_bootloader_args",
+      "command": "source ${config:idf.espIdfPath}/export.sh && esptool.py --chip ${config:idf.adapterTargetName} -p ${config:idf.port} -b 460800 --before=default_reset --after=hard_reset write_flash @flash_bootloader_args",
       "options": {
         "cwd": "${workspaceFolder}/${input:buildDirectory}",
         "env": {
@@ -335,7 +296,7 @@
     {
       "label": "ESP-IDF: Flash partition table",
       "type": "shell",
-      "command": "source ${config:idf.espIdfPath}/export.sh && source ${config:idf.espMatterPath}/export.sh && esptool.py --chip ${config:idf.adapterTargetName} -p ${config:idf.port} -b 460800 --before=default_reset --after=hard_reset write_flash @partition-table-flash_args",
+      "command": "source ${config:idf.espIdfPath}/export.sh && esptool.py --chip ${config:idf.adapterTargetName} -p ${config:idf.port} -b 460800 --before=default_reset --after=hard_reset write_flash @partition-table-flash_args",
       "options": {
         "cwd": "${workspaceFolder}/${input:buildDirectory}",
         "env": {
@@ -356,7 +317,7 @@
     {
       "label": "ESP-IDF: Erase all flash",
       "type": "shell",
-      "command": "source ${config:idf.espIdfPath}/export.sh && source ${config:idf.espMatterPath}/export.sh && idf.py -B ${input:buildDirectory} -p ${config:idf.port} erase-flash",
+      "command": "source ${config:idf.espIdfPath}/export.sh && idf.py -B ${input:buildDirectory} -p ${config:idf.port} erase-flash",
       "options": {
         "env": {
           "IDF_EXPORT_QUIET": "1"
@@ -372,29 +333,10 @@
         "clear": false
       }
     },
-    {
-      "label": "ESP-IDF: Erase range at address",
+       {
+      "label": "ESP-IDF: Install esp-idf",
       "type": "shell",
-      "command": "source ${config:idf.espIdfPath}/export.sh && source ${config:idf.espMatterPath}/export.sh && esptool.py --chip ${config:idf.adapterTargetName} -p ${config:idf.port} -b 460800 --before=default_reset --after=hard_reset erase_region ${input:startingAddress} ${input:range}",
-      "options": {
-        "env": {
-          "IDF_EXPORT_QUIET": "1"
-        }
-      },
-      "problemMatcher": [],
-      "presentation": {
-        "echo": true,
-        "reveal": "always",
-        "focus": false,
-        "panel": "shared",
-        "showReuseMessage": true,
-        "clear": false
-      }
-    },
-    {
-      "label": "ESP-IDF: Install esp-idf & esp-matter",
-      "type": "shell",
-      "command": "git submodule update --init --recursive ${config:idf.espIdfPath} && ${config:idf.espIdfPath}/install.sh ${config:idf.adapterTargetName} && pushd ${config:idf.espMatterPath} && git submodule update --init --depth 1 && ${config:idf.espMatterPath}/connectedhomeip/connectedhomeip/scripts/checkout_submodules.py --platform esp32 darwin --shallow && pushd ${config:idf.espMatterPath}/connectedhomeip/connectedhomeip && source scripts/bootstrap.sh && deactivate && popd && python3 -m pip install -r ${config:idf.espMatterPath}/requirements.txt",
+      "command": "git submodule update --init --recursive ${config:idf.espIdfPath} && ${config:idf.espIdfPath}/install.sh ${config:idf.adapterTargetName} && git submodule update --init --depth 1",
       "group": {
         "kind": "build",
         "isDefault": false
@@ -435,7 +377,7 @@
     {
       "label": "ESP-IDF: link gdb",
       "type": "shell",
-      "command": "source ${config:idf.espIdfPath}/export.sh && source ${config:idf.espMatterPath}/export.sh && ln -s $(which riscv32-esp-elf-gdb) riscv32-esp-elf-gdb",
+      "command": "source ${config:idf.espIdfPath}/export.sh && ln -s $(which riscv32-esp-elf-gdb) riscv32-esp-elf-gdb",
       "options": {
         "env": {
           "IDF_EXPORT_QUIET": "1"
@@ -448,7 +390,7 @@
       "dependsOrder": "sequence",
       "dependsOn": [
         "ESP-IDF: Update submodules",
-        "ESP-IDF: Install esp-idf & esp-matter",
+        "ESP-IDF: Install esp-idf",
         "ESP-IDF: link gdb"
       ],
       "problemMatcher": [],>

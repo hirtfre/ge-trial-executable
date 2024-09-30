@@ -1,0 +1,41 @@
+---
+AlignAfterOpenBracket: Align
+AlignConsecutiveDeclarations: 'false'
+AlignConsecutiveMacros: 'true'
+AlignEscapedNewlines: Right
+AlignOperands: 'true'
+AllowShortBlocksOnASingleLine: 'false'
+AllowShortCaseLabelsOnASingleLine: 'false'
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: 'false'
+AlwaysBreakAfterReturnType: None
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterCaseLabel: true
+  AfterClass: true
+  AfterControlStatement: true
+  AfterEnum: true
+  AfterFunction: true
+  AfterStruct: true
+  AfterUnion: true
+  BeforeCatch: true
+  BeforeElse: true
+BreakBeforeInheritanceComma: 'false'
+BreakBeforeTernaryOperators: 'false'
+BreakConstructorInitializers: AfterColon
+ColumnLimit: '100'
+CompactNamespaces: 'false'
+ContinuationIndentWidth: '4'
+FixNamespaceComments: 'true'
+IncludeBlocks: Merge
+IndentCaseLabels: 'true'
+IndentWidth: '4'
+IndentWrappedFunctionNames: 'true'
+Language: Cpp
+ReflowComments: 'false'
+UseTab: Never
+ForEachMacros: ['TEST_GROUP', 'TEST', 'TEST_GROUP_BASE']
+
+...
+

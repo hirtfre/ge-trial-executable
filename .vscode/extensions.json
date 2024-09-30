@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "nordic-semiconductor.nrf-kconfig",
+    "ms-azure-devops.azure-pipelines",
+    "ms-vscode.cpptools-extension-pack"
+  ]
+}

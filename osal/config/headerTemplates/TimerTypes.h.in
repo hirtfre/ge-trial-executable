@@ -1,0 +1,21 @@
+#ifndef CONFIG_TIMER_TYPES_H
+#define CONFIG_TIMER_TYPES_H
+
+/********************************
+* Auto generated file
+* DO NOT EDIT
+*********************************/
+
+#include <stdint.h>
+
+namespace Timer {
+
+// clang-format off
+enum class Type : uint8_t
+{@PERIPHERAL_TYPES_ENUM@
+};
+// clang-format on
+
+} // namespace Timer
+
+#endif /* CONFIG_TIMER_TYPES_H */

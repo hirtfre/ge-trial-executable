@@ -1,0 +1,25 @@
+{
+  "spis": [
+    {
+      "name": "ADE7953",
+      "host_device": "SPI2_HOST",
+      "miso_io_num": 0,
+      "mosi_io_num": 5,
+      "sclk_io_num": 4,
+      "quadwp_io_num": 1,
+      "quadhd_io_num": 1,
+      "max_transfer_sz": 32,
+      "cs_ena_pretrans": 0,
+      "cs_ena_posttrans": 0,
+      "clock_speed_hz": "5000000",
+      "mode": 0,
+      "flags": 0,
+      "spics_io_num": 1,
+      "command_bits": 0,
+      "address_bits": 0,
+      "dummy_bits": 0,
+      "queue_size": 1,
+      "modules": ["ADE7953Driver"]
+    }
+  ]
+}

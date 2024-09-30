@@ -1,0 +1,21 @@
+#ifndef CONFIG_SPI_TYPES_H
+#define CONFIG_SPI_TYPES_H
+
+/********************************
+* Auto generated file
+* DO NOT EDIT
+*********************************/
+
+#include <stdint.h>
+
+namespace Spi {
+
+// clang-format off
+enum class Type : uint8_t
+{@PERIPHERAL_TYPES_ENUM@
+};
+// clang-format on
+
+} // namespace Spi
+
+#endif /* CONFIG_SPI_TYPES_H */

@@ -1,0 +1,28 @@
+#ifndef CONFIG_CLOCK_OUTPUT_CONFIG_H
+#define CONFIG_CLOCK_OUTPUT_CONFIG_H
+
+#include <array>
+#include <driver/ledc.h>
+
+/********************************
+* Auto generated file
+* DO NOT EDIT
+*********************************/
+
+namespace ClockOutput {
+
+struct ClockOutputConfig
+{
+    ledc_timer_config_t timerConfig;
+    ledc_channel_config_t channelConfig;
+};
+
+static constexpr std::array<ClockOutputConfig, @CLOCK_OUTPUT_COUNT@> clockOutputConfig = {{@CLOCK_OUTPUT_CONFIG_ARRAY@}};
+
+enum class Type : uint8_t
+{
+@CLOCK_OUTPUT_CONFIG_TYPES@};
+
+} // namespace ClockOutput
+
+#endif /* CONFIG_CLOCK_OUTPUT_CONFIG_H */

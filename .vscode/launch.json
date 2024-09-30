@@ -1,0 +1,28 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "gdb",
+      "request": "attach",
+      "name": "NativeDebug",
+      "target": "extended-remote :3333",
+      "executable": "${workspaceFolder}/${input:buildDirectory}/IotActuator.elf",
+      "gdbpath": "${workspaceRoot}/riscv32-esp-elf-gdb",
+      "cwd": "${workspaceRoot}",
+      "autorun": [
+        "mon reset halt",
+        "maintenance flush register-cache",
+        "thb app_main"
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "type": "pickString",
+      "id": "buildDirectory",
+      "description": "Select build directory",
+      "default": "build",
+      "options": ["build", "build_dev", "build_prod"]
+    }
+  ]
+}

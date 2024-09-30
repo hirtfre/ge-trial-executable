@@ -1,0 +1,15 @@
+{
+    "timers": [
+        {
+            "name": "MotorRuntime",
+            "clockSource": "GPTIMER_CLK_SRC_DEFAULT",
+            "direction": "GPTIMER_COUNT_UP",
+            "resolutionHz": "1000000", // 1us resolution
+            "interruptPriority": "3", // 0 - 4 , 0 lowest priority
+            "flags": "0",
+            "modules": [
+                "MotorDriver"
+            ]
+        }
+    ]
+}

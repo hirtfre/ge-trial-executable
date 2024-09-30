@@ -16,23 +16,12 @@ struct TimerConfig
     gptimer_config_t config;
 };
 // clang-format off
-static constexpr std::array<TimerConfig, 1> timerConfig = {{
-    // MotorRuntime
-    {
-        .config    
-            {
-                .clk_src = GPTIMER_CLK_SRC_DEFAULT,
-                .direction = GPTIMER_COUNT_UP,
-                .resolution_hz = 1000000,
-                .intr_priority = 3,
-                .flags = 0,
-            }
-    },
-}};
+static constexpr std::array<TimerConfig, 0> timerConfig;
 
 enum class Type : uint8_t
 {
-    };
+    None,
+};
 // clang-format on
 
 } // namespace Timer

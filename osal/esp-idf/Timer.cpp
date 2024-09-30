@@ -78,9 +78,8 @@ bool Timer::Start(uint32_t timeMs)
 {
     esp_err_t err = gptimer_set_raw_count(gpTimerHandle, 0);
 
-    gptimer_alarm_config_t alarmConfig = {
-        .alarm_count = timeMs * 1000, // period @resolution 1MHz
-    };
+    gptimer_alarm_config_t alarmConfig = {};
+    alarmConfig.alarm_count = timeMs * 1000;
 
     err |= gptimer_set_alarm_action(gpTimerHandle, &alarmConfig);
     err |= gptimer_start(gpTimerHandle);

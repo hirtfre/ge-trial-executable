@@ -59,7 +59,7 @@ idf_build_set_property(COMPILE_OPTIONS "-fdiagnostics-color=always" APPEND)
 # it generates build errors in the matter SDK or it uses overwritten CMake
 # functions which ends in weird behavior.
 add_subdirectory(apps)
-set(USED_LIBRARIES IRingBuffer)
+# Add libraries to link here
 target_link_libraries(${PROJECT_NAME}.elf PRIVATE ${USED_LIBRARIES})
 
 # Add directory paths of libraries required by the files in main folder to

@@ -7,7 +7,6 @@ idf_component_register(
   "."
   "../apps/AbstractionLayer/inc"
   "../apps/GeLib/inc"
-  "../apps/RingBuffer/inc"
   PRIV_REQUIRES
   osal)
 

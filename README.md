@@ -1,35 +1,65 @@
-| Supported Targets | ESP32 | ESP32-C2 | ESP32-C3 | ESP32-C6 | ESP32-H2 | ESP32-P4 | ESP32-S2 | ESP32-S3 |
-| ----------------- | ----- | -------- | -------- | -------- | -------- | -------- | -------- | -------- |
+# Getting Started
 
-# _Sample project_
+## Installation
 
-(See the README.md file in the upper level 'examples' directory for more information about examples.)
+After cloning `GE.Trial.Executable` you have to init and update the submodules with `git submodule update --init`.
 
-This is the simplest buildable example. The example is used by command `idf.py create-project`
-that copies the project to user specified path and set it's name. For more information follow the [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project)
+To init all the dependent submodules you can run the VSCode task `Install esp-idf` or execute the following steps manually:
 
+```shell
+cd ${workspaceFolder}/thirdparty/esp-idf
+git submodule update --init --recursive
+./install.sh
+cd ..
+```
 
+### Prerequisites
 
-## How to use example
-We encourage the users to use the example as a template for the new projects.
-A recommended way is to follow the instructions on a [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project).
+In order to build esp-idf the following modules may be required:
 
-## Example folder contents
+```shell
+sudo apt-get install git wget flex bison gperf python3 python3-pip python3-venv cmake ninja-build ccache libffi-dev libssl-dev dfu-util libusb-1.0-0 gcc g++ pkg-config libdbus-1-dev libglib2.0-dev libavahi-client-dev python3-dev python3-pip unzip libgirepository1.0-dev libcairo2-dev libreadline-dev
+```
 
-The project **sample_project** contains one source file in C language [main.c](main/main.c). The file is located in folder [main](main).
+## Project structure
 
-ESP-IDF projects are built using CMake. The project build configuration is contained in `CMakeLists.txt`
-files that provide set of directives and instructions describing the project's source files and targets
-(executable, library, or both). 
-
-Below is short explanation of remaining files in the project folder.
+The project is structured like follows:
 
 ```
-├── CMakeLists.txt
-├── main
-│   ├── CMakeLists.txt
-│   └── main.c
-└── README.md                  This is the file you are currently reading
+GE.Trial.Executable
+├── apps                        -> GE application layer
+├── main                        -> Main program entry point
+├── osal                        -> Operating system and hardware abstraction
+├── ota/ble                     -> BLE and OTA related code that will be moved at a later stage
+└── thirdparty                  -> Vendor specific dependencies
+    ├── esp-idf
+    └── idf-extra-components
 ```
-Additionally, the sample project contains Makefile and component.mk files, used for the legacy Make based build system. 
-They are not used or needed when building with CMake and idf.py.
+
+## Build project and flash device
+
+To build project and flash device execute following commands in the VSCode command palette:
+
+1. ESP-IDF: Set Espressif Device Target
+2. ESP-IDF: Build your Project
+3. ESP-IDF: Select Port to Use
+4. ESP-IDF: Monitor your Device
+
+## Add a new Module to Application Layer
+
+To add a new Module to the Application Layer the following steps have to be performed:
+
+1. Add git submodule
+
+``` bash
+git submodule add {repository} apps/{moduleName}
+```
+
+2. Add module to libraries to be linked
+    - Insert `set(USED_LIBRARIES {moduleName})` to top level `CMakeLists.txt`
+
+3. Add sub directory to Application Layer
+    - Insert `add_subdirectory({moduleName})` to Application Layer `CMakeLists.txt`
+
+4. Add include directories to app_main (if used)
+    - Insert `"../apps/{moduleName}/inc"` to `PRIV_INCLUDE_DIRS` of app_main component

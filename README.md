@@ -36,14 +36,12 @@ GE.Trial.Executable
     └── idf-extra-components
 ```
 
-## Build project and flash device
+## Build project, flash and monitor device
 
-To build project and flash device execute following commands in the VSCode command palette:
+To build project and flash device execute following VSCode tasks:
 
-1. ESP-IDF: Set Espressif Device Target
-2. ESP-IDF: Build your Project
-3. ESP-IDF: Select Port to Use
-4. ESP-IDF: Monitor your Device
+1. ESP-IDF: Build development
+2. ESP-IDF: flash and monitor
 
 ## Add a new Module to Application Layer
 

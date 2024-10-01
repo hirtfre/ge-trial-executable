@@ -367,4 +367,11 @@ managed_components
 dependencies.lock
 sdkconfig
 sdkconfig.old
+factory_partition/custom/*.bin
 riscv32-esp-elf-gdb
+ota/ble/DefaultConfig.h
+ota/ble/Capabilities.h
+osal/esp-idf/ClockOutputConfig.hpp
+osal/esp-idf/GpioConfig.hpp
+osal/esp-idf/SpiConfig.hpp
+osal/esp-idf/TimerConfig.hpp

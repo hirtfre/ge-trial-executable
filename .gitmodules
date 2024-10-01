@@ -1,0 +1,16 @@
+[submodule "thirdparty/esp-idf"]
+	path = thirdparty/esp-idf
+	url = https://GriesserElectronicAG@dev.azure.com/GriesserElectronicAG/IoT%20Aktor/_git/GE.IoT.esp-idf
+	branch = main
+[submodule "thirdparty/idf-extra-components"]
+	path = thirdparty/idf-extra-components
+	url = https://GriesserElectronicAG@dev.azure.com/GriesserElectronicAG/IoT%20Aktor/_git/GE.IoT.idf-extra-components
+	branch = main
+[submodule "apps/AbstractionLayer"]
+	path = apps/AbstractionLayer
+	url = https://GriesserElectronicAG@dev.azure.com/GriesserElectronicAG/IoT%20Aktor/_git/GE.IoT.AbstractionLayer
+	branch = main
+[submodule "apps/GeLib"]
+	path = apps/GeLib
+	url = https://GriesserElectronicAG@dev.azure.com/GriesserElectronicAG/IoT%20Aktor/_git/GE.IoT.GeLib
+	branch = main

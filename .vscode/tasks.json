@@ -1,0 +1,426 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "ESP-IDF: Build all",
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "dependsOrder": "parallel",
+      "dependsOn": ["ESP-IDF: Build development", "ESP-IDF: Build production"]
+    },
+    {
+      "label": "ESP-IDF: Build development",
+      "type": "shell",
+      "command": "source ${config:idf.espIdfPath}/export.sh && idf.py -B build_dev -DCMAKE_BUILD_TYPE=Debug build && idf_size.py build_dev/TrialExecutable.map",
+      "windows": {},
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "IDF_TARGET": "${config:idf.adapterTargetName}",
+          "SDKCONFIG_DEFAULTS": "sdkconfig.defaults;sdkconfig.dev",
+          "IDF_EXPORT_QUIET": "1"
+        }
+      },
+      "problemMatcher": [
+        {
+          "base": "$gcc",
+          "owner": "cpp",
+          "fileLocation": ["autoDetect", "${workspaceFolder}"],
+          "pattern": {
+            "regexp": "^(.*?):(\\d+):(\\d*):?\\s+(?:fatal\\s+)?(warning|error|note):\\s+(.*)$",
+            "file": 1,
+            "line": 2,
+            "column": 3,
+            "severity": 4,
+            "message": 5
+          }
+        }
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": true
+      }
+    },
+    {
+      "label": "ESP-IDF: Build production",
+      "type": "shell",
+      "command": "source ${config:idf.espIdfPath}/export.sh && idf.py -B build_prod -DCMAKE_BUILD_TYPE=Release build && idf_size.py build_prod/TrialExecutable.map",
+      "windows": {},
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "IDF_TARGET": "${config:idf.adapterTargetName}",
+          "SDKCONFIG_DEFAULTS": "sdkconfig.defaults",
+          "IDF_EXPORT_QUIET": "1"
+        }
+      },
+      "problemMatcher": [
+        {
+          "base": "$gcc",
+          "owner": "cpp",
+          "fileLocation": ["autoDetect", "${workspaceFolder}"],
+          "pattern": {
+            "regexp": "^(.*?):(\\d+):(\\d*):?\\s+(?:fatal\\s+)?(warning|error|note):\\s+(.*)$",
+            "file": 1,
+            "line": 2,
+            "column": 3,
+            "severity": 4,
+            "message": 5
+          }
+        }
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": true
+      }
+    },
+    {
+      "label": "ESP-IDF: Clean project",
+      "type": "shell",
+      "command": "source ${config:idf.espIdfPath}/export.sh && idf.py -B ${input:buildDirectory} fullclean",
+      "windows": {
+        "command": "${config:idf.pythonBinPathWin} ${config:idf.espIdfPathWin}\\tools\\idf.py fullclean",
+        "options": {
+          "env": {
+            "IDF_EXPORT_QUIET": "1"
+          }
+        }
+      },
+      "options": {
+        "env": {}
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      }
+    },
+    {
+      "label": "ESP-IDF: Flash the device",
+      "type": "shell",
+      "command": "source ${config:idf.espIdfPath}/export.sh && esptool.py --chip ${config:idf.adapterTargetName} -p ${config:idf.port} -b ${config:idf.flashBaudRate} --before=default_reset --after=hard_reset write_flash @flash_args",
+      "options": {
+        "env": {
+          "IDF_EXPORT_QUIET": "1"
+        },
+        "cwd": "${workspaceFolder}/${input:buildDirectory}"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      }
+    },
+    {
+      "label": "ESP-IDF: flash and monitor",
+      "dependsOrder": "sequence",
+      "dependsOn": ["ESP-IDF: Flash the device", "ESP-IDF: Start the monitor"],
+      "problemMatcher": []
+    },
+    {
+      "label": "ESP-IDF: Start the monitor",
+      "type": "shell",
+      "command": "source ${config:idf.espIdfPath}/export.sh && idf.py -B ${input:buildDirectory} -p ${config:idf.port} monitor",
+      "windows": {
+        "command": "${config:idf.pythonBinPathWin} ${config:idf.espIdfPathWin}\\tools\\idf.py -p ${config:idf.portWin} monitor",
+        "options": {
+          "env": {
+            "IDF_EXPORT_QUIET": "1"
+          }
+        }
+      },
+      "options": {
+        "env": {}
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      }
+    },
+    {
+      "label": "OpenOCD: Start openOCD",
+      "type": "shell",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "command": "source ${config:idf.espIdfPath}/export.sh && openocd -s $OPENOCD_SCRIPTS -f ${config:idf.openOcdConfigs} -c \"init; reset halt; esp appimage_offset 0x20000; set remotetimeout 2;\"",
+      "windows": {
+        "command": "openocd.exe -s ${command:espIdf.getOpenOcdScriptValue} ${command:espIdf.getOpenOcdConfigs}",
+        "options": {
+          "env": {
+            "IDF_EXPORT_QUIET": "1"
+          }
+        }
+      },
+      "options": {
+        "env": {}
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "adapter",
+      "type": "shell",
+      "command": "${config:idf.pythonBinPath}",
+      "isBackground": true,
+      "options": {
+        "env": {
+          "PATH": "${env:PATH}:${config:idf.customExtraPaths}",
+          "PYTHONPATH": "${command:espIdf.getExtensionPath}/esp_debug_adapter/debug_adapter"
+        }
+      },
+      "problemMatcher": [
+        {
+          "background": {
+            "beginsPattern": "\bDEBUG_ADAPTER_STARTED\b",
+            "endsPattern": "DEBUG_ADAPTER_READY2CONNECT",
+            "activeOnStart": true
+          },
+          "pattern": {
+            "regexp": "(\\d+)-(\\d+)-(\\d+)\\s(\\d+):(\\d+):(\\d+),(\\d+)\\s-(.+)\\s(ERROR)",
+            "file": 8,
+            "line": 2,
+            "column": 3,
+            "severity": 4,
+            "message": 9
+          }
+        }
+      ],
+      "args": [
+        "${command:espIdf.getExtensionPath}/esp_debug_adapter/debug_adapter_main.py",
+        "-e",
+        "${workspaceFolder}/build/${command:espIdf.getProjectName}.elf",
+        "-s",
+        "$OPENOCD_SCRIPTS",
+        "-dn",
+        "esp32",
+        "-om",
+        "connect_to_instance",
+        "-t",
+        "xtensa-esp32-elf-"
+      ],
+      "windows": {
+        "command": "${config:idf.pythonBinPathWin}",
+        "options": {
+          "env": {
+            "PATH": "${env:PATH};${config:idf.customExtraPaths}",
+            "PYTHONPATH": "${command:espIdf.getExtensionPath}/esp_debug_adapter/debug_adapter"
+          }
+        }
+      }
+    },
+    {
+      "label": "ESP-IDF: Flash app partition",
+      "type": "shell",
+      "command": "source ${config:idf.espIdfPath}/export.sh && esptool.py --chip ${config:idf.adapterTargetName} -p ${config:idf.port} -b 460800 --before=default_reset --after=hard_reset write_flash @flash_app_args",
+      "options": {
+        "cwd": "${workspaceFolder}/${input:buildDirectory}",
+        "env": {
+          "IDF_EXPORT_QUIET": "1"
+        }
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      }
+    },
+    {
+      "label": "ESP-IDF: Flash bootloader partition",
+      "type": "shell",
+      "command": "source ${config:idf.espIdfPath}/export.sh && esptool.py --chip ${config:idf.adapterTargetName} -p ${config:idf.port} -b 460800 --before=default_reset --after=hard_reset write_flash @flash_bootloader_args",
+      "options": {
+        "cwd": "${workspaceFolder}/${input:buildDirectory}",
+        "env": {
+          "IDF_EXPORT_QUIET": "1"
+        }
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      }
+    },
+    {
+      "label": "ESP-IDF: Flash partition table",
+      "type": "shell",
+      "command": "source ${config:idf.espIdfPath}/export.sh && esptool.py --chip ${config:idf.adapterTargetName} -p ${config:idf.port} -b 460800 --before=default_reset --after=hard_reset write_flash @partition-table-flash_args",
+      "options": {
+        "cwd": "${workspaceFolder}/${input:buildDirectory}",
+        "env": {
+          "FACTORY_PARTITION_PATH": "${workspaceFolder}/factory_partition",
+          "IDF_EXPORT_QUIET": "1"
+        }
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      }
+    },
+    {
+      "label": "ESP-IDF: Erase all flash",
+      "type": "shell",
+      "command": "source ${config:idf.espIdfPath}/export.sh && idf.py -B ${input:buildDirectory} -p ${config:idf.port} erase-flash",
+      "options": {
+        "env": {
+          "IDF_EXPORT_QUIET": "1"
+        }
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      }
+    },
+       {
+      "label": "ESP-IDF: Install esp-idf",
+      "type": "shell",
+      "command": "git submodule update --init --recursive ${config:idf.espIdfPath} && ${config:idf.espIdfPath}/install.sh ${config:idf.adapterTargetName} && git submodule update --init --depth 1",
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      }
+    },
+    {
+      "label": "ESP-IDF: Update submodules",
+      "type": "shell",
+      "command": "git submodule update --init",
+      "group": {
+        "kind": "none",
+        "isDefault": true
+      },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      }
+    },
+    {
+      "label": "ESP-IDF: link gdb",
+      "type": "shell",
+      "command": "source ${config:idf.espIdfPath}/export.sh && ln -s $(which riscv32-esp-elf-gdb) riscv32-esp-elf-gdb",
+      "options": {
+        "env": {
+          "IDF_EXPORT_QUIET": "1"
+        }
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "ESP-IDF: init repository",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "ESP-IDF: Update submodules",
+        "ESP-IDF: Install esp-idf",
+        "ESP-IDF: link gdb"
+      ],
+      "problemMatcher": [],>
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "startingAddress",
+      "description": "Enter the starting address"
+    },
+    {
+      "type": "promptString",
+      "id": "range",
+      "description": "Enter the range"
+    },
+    {
+      "type": "pickString",
+      "id": "buildDirectory",
+      "description": "Select build directory",
+      "default": "build",
+      "options": ["build", "build_dev", "build_prod"]
+    }
+  ]
+}

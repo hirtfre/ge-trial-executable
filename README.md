@@ -2,7 +2,7 @@
 
 ## Installation
 
-After cloning `GE.Trial.Executable` you have to init and update the submodules with `git submodule update --init`.
+After cloning `ge-trial-executable` you have to init and update the submodules with `git submodule update --init`.
 
 To init all the dependent submodules you can run the VSCode task `Install esp-idf` or execute the following steps manually:
 
@@ -26,7 +26,7 @@ sudo apt-get install git wget flex bison gperf python3 python3-pip python3-venv 
 The project is structured like follows:
 
 ```
-GE.Trial.Executable
+ge-trial-executable
 ├── apps                        -> GE application layer
 ├── main                        -> Main program entry point
 ├── osal                        -> Operating system and hardware abstraction

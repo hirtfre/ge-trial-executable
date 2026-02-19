@@ -47,7 +47,7 @@ if(CONFIG_IDF_TARGET_ESP32C2)
 endif()
 
 idf_build_set_property(CXX_COMPILE_OPTIONS
-                       "-std=gnu++20;-Os;-DCHIP_HAVE_CONFIG_H" APPEND)
+                       "-std=gnu++23;-Os;-DCHIP_HAVE_CONFIG_H" APPEND)
 idf_build_set_property(C_COMPILE_OPTIONS "-Os" APPEND)
 # For RISCV chips, project_include.cmake sets -Wno-format, but does not clear
 # various flags that depend on -Wformat

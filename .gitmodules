@@ -14,3 +14,6 @@
 	path = apps/GeLib
 	url = https://GriesserElectronicAG@dev.azure.com/GriesserElectronicAG/IoT%20Aktor/_git/GE.IoT.GeLib
 	branch = main
+[submodule "apps/Trace"]
+	path = apps/Trace
+	url = https://GriesserElectronicAG@dev.azure.com/GriesserElectronicAG/IoT%20Aktor/_git/GE.IoT.Trace

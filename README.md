@@ -7,10 +7,9 @@ After cloning `ge-trial-executable` you have to init and update the submodules w
 To init all the dependent submodules you can run the VSCode task `Install esp-idf` or execute the following steps manually:
 
 ```shell
-cd ${workspaceFolder}/thirdparty/esp-idf
+cd /thirdparty/esp-idf
 git submodule update --init --recursive
 ./install.sh
-cd ..
 ```
 
 ### Prerequisites
@@ -30,7 +29,6 @@ ge-trial-executable
 ├── apps                        -> GE application layer
 ├── main                        -> Main program entry point
 ├── osal                        -> Operating system and hardware abstraction
-├── ota/ble                     -> BLE and OTA related code that will be moved at a later stage
 └── thirdparty                  -> Vendor specific dependencies
     ├── esp-idf
     └── idf-extra-components

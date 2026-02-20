@@ -60,6 +60,7 @@ idf_build_set_property(COMPILE_OPTIONS "-fdiagnostics-color=always" APPEND)
 # functions which ends in weird behavior.
 add_subdirectory(apps)
 # Add libraries to link here
+set(USED_LIBRARIES ITrace)
 target_link_libraries(${PROJECT_NAME}.elf PRIVATE ${USED_LIBRARIES})
 
 # Add directory paths of libraries required by the files in main folder to

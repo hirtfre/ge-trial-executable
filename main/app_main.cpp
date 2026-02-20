@@ -1,8 +1,16 @@
-#include <esp_log.h>
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include <AbstractionLayer/Task/ITaskFactory.h>
+#include <Trace/ITrace.h>
 
-static const char *TAG = "app_main";
+static constexpr const char *moduleName = "main";
 
 extern "C" void app_main()
 {
-    ESP_LOGI(TAG, "Hello World!");
+    Trace::Log(moduleName, Trace::Level::Info, "Hello World!");
+
+    while (true)
+    {
+        vTaskDelay(pdMS_TO_TICKS(1));
+    }
 }

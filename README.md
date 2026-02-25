@@ -7,7 +7,7 @@ After cloning `ge-trial-executable` you have to init and update the submodules w
 To init all the dependent submodules you can run the VSCode task `Install esp-idf` or execute the following steps manually:
 
 ```shell
-cd /thirdparty/esp-idf
+cd thirdparty/esp-idf
 git submodule update --init --recursive
 ./install.sh
 ```

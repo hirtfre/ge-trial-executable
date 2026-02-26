@@ -17,3 +17,6 @@
 [submodule "apps/Trace"]
 	path = apps/Trace
 	url = https://GriesserElectronicAG@dev.azure.com/GriesserElectronicAG/IoT%20Aktor/_git/GE.IoT.Trace
+[submodule "apps/ring-buffer"]
+	path = apps/ring-buffer
+	url = https://github.com/hirtfre/ge-trial-ring-buffer.git
